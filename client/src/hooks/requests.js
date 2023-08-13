@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000/v1';
+const API_URL = 'http://nasa-mission-control-eight.vercel.app/v1';
 
 async function httpGetPlanets() {
     const response = await fetch(`${API_URL}/planets`);
