@@ -8,6 +8,7 @@ jest.setTimeout(70 * SECONDS)
 describe("Launches API", () => {
   beforeAll(async () => {
     await mongoConnect();
+    await loadPlanetsData();
   });
   afterAll(async () => {
     await mongoDisconnect();
