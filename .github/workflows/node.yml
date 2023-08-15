@@ -13,7 +13,13 @@ on:
 jobs:
 
   build:
-
+    env:
+      CI: true
+      MONGO_URL: mongodb://localhost/nasa
+    strategy:
+        matrix:
+          node-version: [14.x, 16.x]
+          mongodb-version: ['4.4']
     runs-on: ubuntu-latest
 
     steps:
@@ -26,8 +32,15 @@ jobs:
 
         with:
 
-          node-version: '16'
+          node-version: ${{ matrix.node-version }}
 
+      - name: Use MongoDB from Github Actions
+
+        uses: supercharge/mongodb-github-action@v2.0.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
       - run: npm install
 
       - run: CI=false npm run build --prefix client
+
+      - run: npm test
